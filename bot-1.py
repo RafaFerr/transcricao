@@ -3,6 +3,7 @@ from botcity.plugins.files import BotFilesPlugin
 from botcity.plugins.email import BotEmailPlugin
 import logging
 logging.basicConfig(level=logging.INFO, filename=r'c:\log\log.txt', format="%(asctime)s $ %(message)s", datefmt='%d/%m/%Y %I:%M:%S %p')
+from credencial import segredos
 
 
 # Import for the Desktop Bot
@@ -23,10 +24,10 @@ def main():
     #email.configure_imap("mail.3ribh.com", 993)
 
     # Configure SMTP with the gmail server
-    email.configure_smtp("mail.3ribh.com", 587)
+    email.configure_smtp(segredos.get('segredo_servidor'), 587)
 
     # Login with a valid email account
-    email.login("rafael@3ribh.com", "El25fp83")
+    email.login(segredos.get('segredo_email'), segredos.get('segredo_senha'))
 
 
 
@@ -35,12 +36,13 @@ def main():
     folder = BotFilesPlugin()
     arquivos = folder.get_all_file_paths(directory_path=caminho)
 
+
     for tr in arquivos:
         alter1 = tr.replace('c:\Tr', '')
         extensao = alter1[13:17]
         alter2 = alter1[1:8]
 
-        to = ["rafael@3ribh.com", "<RECEIVER_ADDRESS_2>"]
+        to = [segredos.get('segredo_email'), "<RECEIVER_ADDRESS_2>"]
         subject = "Falha na Validação dos Arquivos"
         body = "Verificar o arquivo log com os erros"
         files = ["c:\log\log.txt"]
