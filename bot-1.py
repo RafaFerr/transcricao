@@ -26,7 +26,7 @@ def main():
     email.configure_smtp("mail.3ribh.com", 587)
 
     # Login with a valid email account
-    email.login("rafael@3ribh.com", "El25fp83")
+    email.login("", "")
 
 
 
